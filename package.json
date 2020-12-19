@@ -1,15 +1,15 @@
 {
     "name": "@atomico/build",
     "type": "module",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "build for @atomico/cli",
-    "main": "./build.js",
+    "main": "./build.cjs",
     "module": "./src/build.js",
     "typings": "types.d.ts",
     "exports": {
         ".": {
             "import": "./src/build.js",
-            "require": "./build.js"
+            "require": "./build.cjs"
         }
     },
     "publishConfig": {
@@ -38,6 +38,7 @@
         "rollup-plugin-terser": "^7.0.2"
     },
     "devDependencies": {
+        "@betit/rollup-plugin-rename-extensions": "^0.1.0",
         "atomico": "^1.9.1",
         "ava": "^3.10.1",
         "builtin-modules": "^3.1.0",
