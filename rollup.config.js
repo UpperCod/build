@@ -2,7 +2,7 @@ import builtins from "builtin-modules";
 import pkg from "./package.json";
 
 export default {
-    input: ["./src/module.js"],
+    input: ["./src/build.js"],
     output: [
         {
             dir: "./",

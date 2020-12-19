@@ -1,8 +1,8 @@
 {
-    "name": "pkg_name",
+    "name": "@atomico/build",
     "type": "module",
     "version": "0.0.0",
-    "description": "Capture text fragments based on regular expressions that are executed for each line of the text",
+    "description": "build for @atomico/cli",
     "main": "./build.js",
     "module": "./src/build.js",
     "typings": "types.d.ts",
