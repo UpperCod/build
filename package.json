@@ -5,6 +5,13 @@
     "description": "Capture text fragments based on regular expressions that are executed for each line of the text",
     "main": "./build.js",
     "module": "./src/build.js",
+    "typings": "types.d.ts",
+    "exports": {
+        ".": {
+            "import": "./src/build.js",
+            "require": "./build.js"
+        }
+    },
     "publishConfig": {
         "access": "public"
     },
@@ -36,17 +43,10 @@
         "builtin-modules": "^3.1.0",
         "rollup": "^2.21.0"
     },
-    "typings": "types.d.ts",
     "ava": {
         "files": [
             "tests/**/*.test.js"
         ]
-    },
-    "exports": {
-        ".": {
-            "import": "./src/build.js",
-            "require": "./build.js"
-        }
     },
     "prettier": {
         "tabWidth": 4,

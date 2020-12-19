@@ -1,7 +1,8 @@
 import path from "path";
 import { resolve } from "@uppercod/replace-import/resolve";
 /**
- * @param {{root:string}} options -
+ * Resolves the path of the resources only if they exist in NPM
+ * @param {{root:string}} options - define the root directory of the assets
  * @returns {import("rollup").Plugin}
  */
 export const pluginResolve = ({ root }) => ({
