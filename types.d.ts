@@ -1,1 +1,1 @@
-declare module "pkg_name" {}
+declare module "" {}
