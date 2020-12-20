@@ -18,6 +18,7 @@ import { getExternal } from "./get-external.js";
  * @param {boolean} [options.sourcemap] - enable the use of sourcemap for files type js
  * @param {boolean} [options.minify] - minify the js code
  * @param {string[]} [options.external] - minify the js code
+ * @param {boolean} [options.cdn] - minify the js code
  */
 export async function createBuild({
     src,
@@ -26,6 +27,7 @@ export async function createBuild({
     sourcemap,
     minify,
     external,
+    cdn,
 }) {
     const root = src.replace(/^([^\*]+)(.*)/, "$1");
 
@@ -56,7 +58,10 @@ export async function createBuild({
 
     const dir = join(dist, assetsKeys.length ? "assets" : "");
 
-    const plugins = [pluginResolve({ root }), pluginEmit(assetsJs, assets)];
+    const plugins = [
+        pluginResolve({ root, cdn }),
+        pluginEmit(assetsJs, assets),
+    ];
 
     if (minify) plugins.push(terser());
 
