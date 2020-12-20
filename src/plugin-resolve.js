@@ -10,6 +10,10 @@ import { resolve } from "@uppercod/replace-import/resolve";
 export const pluginResolve = ({ root, cdn }) => ({
     name: "plugin-resolve",
     resolveId(source) {
+        // ignore dependency if this is already a url
+        if (/^http(s){0,1}\:\/\//.test(source))
+            return { id: source, external: true };
+        // In the opposite case, associate a resolution process
         return source[0] == "."
             ? null
             : source[0] == "/"
