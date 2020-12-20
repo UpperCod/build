@@ -1,7 +1,7 @@
 {
     "name": "@atomico/build",
     "type": "module",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "build for @atomico/cli",
     "main": "./build.cjs",
     "module": "./src/build.js",
@@ -19,6 +19,7 @@
         "build": "rollup -c",
         "dev": "rollup -c -w",
         "test": "ava",
+        "example": "node tests/build.js",
         "prepare": "npm run build"
     },
     "repository": {
