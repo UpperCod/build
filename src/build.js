@@ -1,4 +1,4 @@
-import path from "path";
+import { join } from "path";
 import glob from "fast-glob";
 import { rollup } from "rollup";
 import { terser } from "rollup-plugin-terser";
@@ -7,6 +7,8 @@ import { loadHtml } from "./load-html.js";
 import { prepareDir } from "./utils.js";
 import { pluginEmit } from "./plugin-emit.js";
 import { pluginResolve } from "./plugin-resolve.js";
+import { getExternal } from "./get-external.js";
+
 /**
  *
  * @param {Object} options
@@ -15,8 +17,16 @@ import { pluginResolve } from "./plugin-resolve.js";
  * @param {string} [options.href] - prefix for assets associated with html files
  * @param {boolean} [options.sourcemap] - enable the use of sourcemap for files type js
  * @param {boolean} [options.minify] - minify the js code
+ * @param {string[]} [options.external] - minify the js code
  */
-export async function createBuild({ src, dist, href, sourcemap, minify }) {
+export async function createBuild({
+    src,
+    dist,
+    href,
+    sourcemap,
+    minify,
+    external,
+}) {
     const root = src.replace(/^([^\*]+)(.*)/, "$1");
 
     const [input, html] = (await glob(src)).reduce(
@@ -44,7 +54,7 @@ export async function createBuild({ src, dist, href, sourcemap, minify }) {
 
     const assetsJs = assetsKeys.filter((src) => src.endsWith(".js"));
 
-    const dir = path.join(dist, assetsKeys.length ? "assets" : "");
+    const dir = join(dist, assetsKeys.length ? "assets" : "");
 
     const plugins = [pluginResolve({ root }), pluginEmit(assetsJs, assets)];
 
@@ -53,6 +63,7 @@ export async function createBuild({ src, dist, href, sourcemap, minify }) {
     const bundle = await rollup({
         input,
         preserveEntrySignatures: false,
+        external: external ? external : Object.keys(await getExternal(root)),
         plugins,
     });
 
@@ -61,7 +72,7 @@ export async function createBuild({ src, dist, href, sourcemap, minify }) {
     }
 
     await Promise.all(
-        assetsCopy.map(async (id) => copyFile(id, path.join(dir, assets[id])))
+        assetsCopy.map(async (id) => copyFile(id, join(dir, assets[id])))
     );
 
     await bundle.write({
