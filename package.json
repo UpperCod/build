@@ -1,7 +1,7 @@
 {
     "name": "@atomico/build",
     "type": "module",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "build for @atomico/cli",
     "main": "./build.cjs",
     "module": "./src/build.js",
