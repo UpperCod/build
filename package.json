@@ -1,7 +1,7 @@
 {
     "name": "@devserver/build",
     "type": "module",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "build for @devserver/cli",
     "main": "./build.cjs",
     "module": "./src/build.js",
