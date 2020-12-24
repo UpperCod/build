@@ -68,7 +68,11 @@ export async function createBuild({
     const bundle = await rollup({
         input,
         preserveEntrySignatures: false,
-        external: external ? external : await getExternal(root),
+        external: html.length
+            ? []
+            : external
+            ? external
+            : await getExternal(root),
         plugins,
     });
 
